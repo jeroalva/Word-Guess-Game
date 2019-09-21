@@ -60,9 +60,6 @@ document.onkeyup = function(letraPresionada){
             letrasIntentadas.textContent = letIntentadas;
         }
 
-        console.log(tabletaAleatoria);
-        faltanLetras = tabletaAleatoria.replace(/[^*]/g,"").length;
-        console.log(tabletaAleatoria);
+        faltanLetras = tabletaAleatoria.length - tabletaAleatoria.replace(/[^*]/g,"").length;
         estatusJuego();
-        console.log(faltanLetras);
 }
