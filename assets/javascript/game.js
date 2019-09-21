@@ -23,37 +23,46 @@ console.log(underScores);
 var cuentaIntentos = 0;
 var intentosRestan = tabletaAleatoria.length * 2;
 var letIntentadas = "";
+var faltanLetras = tabletaAleatoria.length;
+
+function estatusJuego(){
+    if(intentosRestan>0 && faltanLetras>0){
+        intentosRemanentes.textContent="Te quedan " + intentosRestan + " intentos!";
+        }
+        else if(intentosRestan<=0 && faltanLetras>0){
+            intentosRemanentes.textContent="Perdiste!";
+        }
+        else if(intentosRestan>=0 && faltanLetras<=0){
+            intentosRemanentes.textContent="Ganaste!";
+        }
+}
 
 document.onkeyup = function(letraPresionada){
+    var letraUsuario = letraPresionada.key;
+    var posicionTableta = tabletaAleatoria.indexOf(letraUsuario);
+    var posicionUnderS = tabletaAleatoria.indexOf(letraUsuario)*2;
     intentosRestan--;
-    var faltanLetras = tabletaAleatoria.length - tabletaAleatoria.replace(/[^*]/g,"").length;
-    console.log(faltanLetras);
-    if(intentosRestan>0 && faltanLetras>0){
-    intentosRemanentes.textContent="Te quedan " + intentosRestan + " intentos!";
+    cuentaIntentos++;
+
+    if(cuentaIntentos===1){
+        letIntentadas= "Letras intentadas: " + letraUsuario;
     }
-    else{
-        intentosRemanentes.textContent="Perdiste!"
+    else {
+    letIntentadas = letIntentadas + ", " + letraUsuario;
     }
 
-    if(tabletaAleatoria.indexOf(letraPresionada.key)>=0){
-        var letraUsuario = letraPresionada.key;
-        var posicionTableta = tabletaAleatoria.indexOf(letraUsuario);
-        var posicionUnderS = tabletaAleatoria.indexOf(letraUsuario)*2;
+        if(tabletaAleatoria.indexOf(letraPresionada.key)>=0 && intentosRestan>=0 && faltanLetras>0){
 
-        underScores = underScores.substring(0,posicionUnderS) + letraPresionada.key + underScores.substring(posicionUnderS+1,underScores.length+1);
-        tabletaAleatoria = tabletaAleatoria.substring(0,posicionTableta) + "*" + tabletaAleatoria.substring(posicionTableta+1,tabletaAleatoria.length+1);
-        console.log(underScores);
+            underScores = underScores.substring(0,posicionUnderS) + letraPresionada.key + underScores.substring(posicionUnderS+1,underScores.length+1);
+            tabletaAleatoria = tabletaAleatoria.substring(0,posicionTableta) + "*" + tabletaAleatoria.substring(posicionTableta+1,tabletaAleatoria.length+1);
+            
+            espaciosLetras.textContent = underScores;
+            letrasIntentadas.textContent = letIntentadas;
+        }
+
         console.log(tabletaAleatoria);
-
-        espaciosLetras.textContent = underScores;
-
-        if(cuentaIntentos===1){
-            letIntentadas= "Letras intentadas: " + letraPresionada.key
-        }
-        else {
-        letIntentadas = letIntentadas + ", " + letraPresionada.key
-        }
-
-        letrasIntentadas.textContent = letIntentadas;
-    }
+        faltanLetras = tabletaAleatoria.replace(/[^*]/g,"").length;
+        console.log(tabletaAleatoria);
+        estatusJuego();
+        console.log(faltanLetras);
 }
