@@ -2,6 +2,11 @@
     font-family: 'Michroma', sans-serif;
 }
 
-#fotoRes {
-    width:200px;
+.fotoPrincipal {
+    width:50%;
+    padding: 1em;
+}
+
+.fotoPrincipal > img {
+    width: 50%;
 }
