@@ -1,5 +1,5 @@
 var guessesLeft = 15;
-var modelosTabletas = ["AluexLura", "JabeAluminio", "Lumex", "Loral", "Malva"];
+var modelosTabletas = ["AluexLura", "JabeAluminio", "Lumex", "Loral", "Malva","sea","Minilux"];
 var inputsMade = [];
 var guessesMade = [];
 var imgArray = new Array();
@@ -14,8 +14,18 @@ imgArray[3] = new Image();
 imgArray[3].src = "assets/images/Jabe-de-Aluminio-68.jpg";
 imgArray[4] = new Image();
 imgArray[4].src = "assets/images/Malva-17.jpg";
+imgArray[5] = new Image();
+imgArray[5].src = "assets/images/Malva-17.jpg";
+imgArray[6] = new Image();
+imgArray[6].src = "assets/images/Malva-17.jpg";
+imgArray[7] = new Image();
+imgArray[7].src = "assets/images/Malva-17.jpg";
+imgArray[8] = new Image();
+imgArray[8].src = "assets/images/Looser.jpg";
 
-var cancion = new Audio("assets/songs/Celebration.mp3")
+var cancion = new Audio("assets/songs/Celebration.mp3");
+var looser = new Audio("assets/songs/Looser.mp3");
+
 
 var imagenRes = document.getElementById("fotoRes");
 var espaciosLetras = document.getElementById("letras");
@@ -45,6 +55,8 @@ function estatusJuego(){
         }
         else if(intentosRestan<=0 && faltanLetras>0){
             intentosRemanentes.textContent="Perdiste!";
+            imagenRes.src = imgArray[8].src;
+            looser.play();
         }
         else if(intentosRestan>=0 && faltanLetras<=0){
             intentosRemanentes.textContent="Ganaste!";
@@ -98,6 +110,8 @@ faltanLetras = tabletaAleatoria.length;
 imagenRes.src = "assets/images/ImagenInicial.jpg";
 cancion.pause();
 cancion.currentTime=0;
+looser.pause();
+looser.currentTime=0;
 console.log(tabletaAleatoria);
 console.log(botonR);
 })
