@@ -31,7 +31,9 @@ var imagenRes = document.getElementById("fotoRes");
 var espaciosLetras = document.getElementById("letras");
 var intentosRemanentes = document.getElementById("guessesLeft");
 var letrasIntentadas = document.getElementById("textoInicial");
-
+var cuentaPG = document.getElementById("cuentaPG");
+var contadorGana = 0;
+var contadorPierde =0;
 var valorAleatorio = Math.floor(Math.random() * modelosTabletas.length);
 var tabletaAleatoria = modelosTabletas[valorAleatorio].toLowerCase();
 console.log(tabletaAleatoria);
@@ -53,13 +55,39 @@ function estatusJuego(){
     if(intentosRestan>0 && faltanLetras>0){
         intentosRemanentes.textContent="Te quedan " + intentosRestan + " intentos!";
         }
-        else if(intentosRestan<=0 && faltanLetras>0){
+        else if(intentosRestan<=0 && faltanLetras>0 && intentosRemanentes.textContent !== "Perdiste!"){
             intentosRemanentes.textContent="Perdiste!";
+            contadorPierde = contadorPierde + 1;
+                if(contadorGana === 1 && contadorPierde === 1){
+                cuentaPG.innerHTML = "Haz ganado: " + contadorGana +" vez" + "<br />" + "Haz perdido: " + contadorPierde + "vez"; 
+                    }
+                else if((contadorGana > 1 | contadorGana === 0) && (contadorPierde > 1 | contadorPierde === 0)){
+                cuentaPG.innerHTML = "Haz ganado: " + contadorGana +" veces" + "<br />" + "Haz perdido: " + contadorPierde + " veces"; 
+                    }
+                else if((contadorGana > 1 | contadorGana === 0) && contadorPierde  === 1){
+                    cuentaPG.innerHTML = "Haz ganado: " + contadorGana +" veces" + "<br />" + "Haz perdido: " + contadorPierde + " vez"; 
+                    }
+                else if(contadorGana === 1 && (contadorPierde > 1 | contadorPierde === 0)){
+                    cuentaPG.innerHTML = "Haz ganado: " + contadorGana +" vez" + "<br />" + "Haz perdido: " + contadorPierde + " veces"; 
+                    } 
             imagenRes.src = imgArray[8].src;
             looser.play();
         }
-        else if(intentosRestan>=0 && faltanLetras<=0){
+        else if(intentosRestan>=0 && faltanLetras<=0 && intentosRemanentes.textContent !== "Ganaste!"){
             intentosRemanentes.textContent="Ganaste!";
+            contadorGana = contadorGana + 1;
+            if(contadorGana === 1 && contadorPierde === 1){
+                cuentaPG.innerHTML = "Haz ganado: " + contadorGana +" vez" + "<br />" + "Haz perdido: " + contadorPierde + "vez"; 
+                    }
+                else if((contadorGana > 1 | contadorGana === 0) && (contadorPierde > 1 | contadorPierde === 0)){
+                cuentaPG.innerHTML = "Haz ganado: " + contadorGana +" veces" + "<br />" + "Haz perdido: " + contadorPierde + " veces"; 
+                    }
+                else if((contadorGana > 1 | contadorGana === 0) && contadorPierde  === 1){
+                    cuentaPG.innerHTML = "Haz ganado: " + contadorGana +" veces" + "<br />" + "Haz perdido: " + contadorPierde + " vez"; 
+                    }
+                else if(contadorGana === 1 && (contadorPierde > 1 | contadorPierde === 0)){
+                    cuentaPG.innerHTML = "Haz ganado: " + contadorGana +" vez" + "<br />" + "Haz perdido: " + contadorPierde + " veces"; 
+                    } 
             imagenRes.src = imgArray[valorAleatorio].src;
             cancion.play();
         }
